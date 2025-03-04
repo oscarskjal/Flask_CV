@@ -15,7 +15,7 @@ def home():
 @app.route('/detect_faces_camera', methods=['GET'])
 def detect_faces_camera():
     # Open the default camera
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     if not cap.isOpened():
         return jsonify({"error": "Could not open camera"}), 500
