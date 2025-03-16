@@ -1,20 +1,21 @@
 from flask import Flask, jsonify
 import cv2
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  
 
-# pre-trained Haar Cascade classifier for face detection
+# Pre-trained Haar Cascade classifier for face detection
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 @app.route('/')
 def home():
     return "Hello Flask from ubuntu!"
 
-
 @app.route('/detect_faces_camera', methods=['GET'])
 def detect_faces_camera():
-    # Open the default camera
+    
     cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():
