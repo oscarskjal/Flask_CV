@@ -4,7 +4,7 @@ The Frontend app in question: https://github.com/oscarskjal/cv_arcada
 
 To run this backend, simply do the following:
 
-1. Clone the repository using git clone <Url to this repo>
+1. Clone the repository using git clone <thisurl>
 
 2. open the repo
 
