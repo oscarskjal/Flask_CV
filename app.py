@@ -1,20 +1,22 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
+import pyttsx3
 import cv2
 import threading
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
-CORS(app, resources={r"/*": {"origins": "*"}})  # CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Pre-trained Haar Cascade classifier for face detection
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 camera = cv2.VideoCapture(0)
 
+speech_done = False  
+
 def detect_faces():
+    global speech_done
     while True:
         success, frame = camera.read()
         if not success:
@@ -23,10 +25,27 @@ def detect_faces():
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
         face_list = [{"x": int(x), "y": int(y), "width": int(w), "height": int(h)} for (x, y, w, h) in faces]
         socketio.emit('faces_detected', {'faces': face_list})
+        
+        if face_list and not speech_done:  
+            speech_done = True  
+            engine = pyttsx3.init()
+            engine.say("Hello! I am your computer vision Arcada assistant here to introduce you to Arcada!")
+            engine.runAndWait()
 
 @app.route('/')
 def home():
-    return "Hello Flask from ubuntu!"
+    return "Hello Flask from Ubuntu!"
+
+@app.route('/text_to_speech', methods=['POST'])
+def text_to_speech():
+    data = request.json
+    text = data.get('text', '')
+    if text:
+        engine = pyttsx3.init()
+        engine.say(text)
+        engine.runAndWait()
+        return jsonify({"status": "success", "message": "Text spoken successfully"}), 200
+    return jsonify({"status": "error", "message": "No text provided"}), 400
 
 @socketio.on('connect')
 def handle_connect():
