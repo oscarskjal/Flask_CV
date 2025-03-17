@@ -1,10 +1,10 @@
-This is my computervision Flask backend to my Vue.js application about arcada!
+This is my computer vision Flask backend to my Vue.js application about Arcada!
 The Frontend app in question: https://github.com/oscarskjal/cv_arcada
 
 
 To run this backend, simply do as follows:
 
-1. Clon the repository using git clone <Url to this repo>
+1. Clone the repository using git clone <Url to this repo>
 
 2. open the repo
 
