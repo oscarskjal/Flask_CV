@@ -6,7 +6,7 @@ To run this backend, simply do the following:
 
 1. Clone the repository using git clone <thisurl>
 
-2. open the repo
+2. Open the repo
 
 3. Open a new terminal and type pip install -r requirements.txt
 
