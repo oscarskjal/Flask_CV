@@ -17,6 +17,7 @@ speech_done = False
 
 def detect_faces():
     global speech_done
+    
     while True:
         success, frame = camera.read()
         if not success:
