@@ -13,3 +13,15 @@ To run this backend, simply do the following:
 4. type pip install -r requirements.txt
 
 5. Lastly type in the terminal: python app.py
+
+IF this does not work do the following in the terminal:
+
+1. python -m venv venv
+
+2. venv\Scripts\Activate
+
+3. pip install -r requirements.txt
+
+4. python app.py
+
+
