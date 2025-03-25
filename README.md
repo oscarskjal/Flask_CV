@@ -8,6 +8,8 @@ To run this backend, simply do the following:
 
 2. Open the repo
 
-3. Open a new terminal and type pip install -r requirements.txt
+3. Open a new terminal and activate the virtual environment by typing: venv\Scripts\Activate
+  
+4. type pip install -r requirements.txt
 
-4. Lastly type in the terminal: python app.py
+5. Lastly type in the terminal: python app.py
